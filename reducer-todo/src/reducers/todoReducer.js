@@ -3,12 +3,27 @@ export const todoReducer = (state, action) => {
         case 'ADD_TODO':
             return [
                 ...state,
-                // todo: [...state, action.payload]
                 {
                     item: action.payload,
                     completed: false,
                     id: Date.now()
                 }
+            ]
+        case 'TOGGLE_TODO':
+            return [
+                console.log(state),
+                state.map(todo => {
+                    console.log(todo)
+                    if(action.payload === todo.key) {
+                        return (
+                            // ...todo,
+                            // completed: !todo.completed
+                            console.log("hello")
+                        )
+                    } else {
+                        return todo;
+                    }
+                })
             ]
         default: return state;
     }

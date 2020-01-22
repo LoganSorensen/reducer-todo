@@ -7,11 +7,11 @@ import './App.css';
 
 function App() {
   const [state, dispatch] = useReducer(todoReducer, todo)
-  console.log(todo);
+  // console.log(state);
 
   return (
     <div className="App">
-      <TodoList todo={state} />
+      <TodoList state={state} dispatch={dispatch} />
       <TodoForm dispatch={dispatch} />
     </div>
   );
