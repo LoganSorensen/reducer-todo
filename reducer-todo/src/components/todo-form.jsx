@@ -1,38 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class TodoForm extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            todoText: ''
-        }
-    }
+const TodoForm = props => {
+    
+    const [state, setState] = useState('')
 
-    handleChanges = e => {
-        this.setState({todoText: e.target.value});
+    const handleChanges = e => {
+        setState(e.target.value);
     };
 
-    handleSubmit = e => {
+    const addTodo = e => {
         e.preventDefault();
-        this.props.dispatch({type: 'ADD_TODO', payload: this.state.todoText})
-        this.setState({todoText: ''})
+        props.dispatch({type: 'ADD_TODO', payload: state})
+        setState('')
     }
 
-    render() {
+    const removeTodo = e => {
+        e.preventDefault();
+        props.dispatch({type: 'REMOVE_TODO', payload: state})
+    }
+    
         return (
             <form>
                 <input
                     type='text'
                     name='todo'
-                    value={this.state.todoText}
-                    onChange={this.handleChanges}
+                    value={state}
+                    onChange={handleChanges}
                 />
                 <button 
-                onClick={this.handleSubmit}
+                onClick={addTodo}
                 >Add Task</button>
+                <button onClick={removeTodo}>Remove Completed</button>
             </form>
         )
-    }
 }
 
 export default TodoForm;
+
+
+
+// class TodoForm extends React.Component {
+//     constructor() {
+//         super();
+//         this.state = {
+//             todoText: ''
+//         }
+//     }
+
+//     handleChanges = e => {
+//         this.setState({todoText: e.target.value});
+//     };
+
+//     handleSubmit = e => {
+//         e.preventDefault();
+//         this.props.dispatch({type: 'ADD_TODO', payload: this.state.todoText})
+//         this.setState({todoText: ''})
+//     }
+
+//     render() {
+//         return (
+//             <form>
+//                 <input
+//                     type='text'
+//                     name='todo'
+//                     value={this.state.todoText}
+//                     onChange={this.handleChanges}
+//                 />
+//                 <button 
+//                 onClick={this.handleSubmit}
+//                 >Add Task</button>
+//             </form>
+//         )
+//     }
+// }
+
+// export default TodoForm;
